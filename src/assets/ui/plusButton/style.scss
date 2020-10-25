@@ -1,0 +1,35 @@
+@import "../../styles/const.scss";
+@import "../../styles/mixin.scss";
+
+.plusButton {
+    @include boxSize(auto, 32px);
+    display: flex;
+    background-color: $createButtonBackgroundColor;
+    border-radius: 4px;
+    font-size: 14px;
+    color: $createButtonTextColor;
+    font-family: $mainFontRegular, $spareFonts;
+    padding: 1px 5px 0 0;
+    cursor: pointer;
+
+    p {
+        @include boxSize(32px, 100%);
+        padding: 2px 0 0 15px;
+        .anticon  {
+            @include boxSize(auto, auto);
+            margin: 0;
+        }
+    }
+
+    span {
+        @include boxSize(auto, 100%);
+        display: block;
+        background-color: transparent;
+        padding: 0 15px 0 0;
+        margin: 0 0 0 4px;
+        line-height: 32px;
+    }
+}
+.plusButton:hover {
+    background-color: $createButtonBackgroundColorHover;
+}

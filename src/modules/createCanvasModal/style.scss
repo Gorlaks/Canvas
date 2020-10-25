@@ -1,0 +1,39 @@
+@import "../../assets/styles/const.scss";
+@import "../../assets/styles/mixin.scss";
+
+.create-canvas-modal {
+  &__title {
+    @include boxSize(100%, 30px);
+    color: #363636;
+    text-align: center;
+    line-height: 30px;
+    font-size: 24px;
+    margin: 30px 0 0 0;
+    font-family: $mainFontRegular, $spareFonts;
+  }
+
+  &__name-field {
+    @include boxSize(100%, 60px);
+    @include flexCenter();
+    margin: 15px 0 0 0;
+
+    input {
+      @include defaultInputStyle();
+    }
+  }
+
+  &__type-choice {
+    @include boxSize(100%, 60px);
+    @include flexCenter();
+
+    button {
+      @include boxSize(74px, 32px);
+      background-color: transparent;
+      border: 1px solid $secondMainColor;
+      font-size: 14px;
+      color: $secondMainColor;
+      font-family: $mainFontRegular, $spareFonts;
+      cursor: pointer;
+    }
+  }
+}

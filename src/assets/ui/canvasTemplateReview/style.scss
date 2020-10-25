@@ -1,0 +1,21 @@
+@import "../../styles/const.scss";
+@import "../../styles/mixin.scss";
+
+.canvas-template-review {
+  @include boxSize(100%, 100%);
+  margin: 0;
+  display: grid;
+  position: relative;
+
+  div:not(.canvas-template-review__cover) {
+    @include boxSize(auto, auto);
+    border: 1px solid $mainColor;
+    text-align: center;
+    font-family: $mainFontRegular, $spareFonts;
+    font-size: 12px;
+    overflow: hidden;
+    span {
+      font-family: $mainFontMedium, $spareFonts;
+    }
+  }
+}

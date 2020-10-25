@@ -1,0 +1,70 @@
+@import "../../../assets/styles/const.scss";
+@import "../../../assets/styles/mixin.scss";
+
+.user {
+	padding: 0 15%;
+	&__title {
+		display: block;
+		@include boxSize(100%, 22px);
+		font-size: 32px;
+		line-height: 22px;
+		font-family: $mainFontMedium,  $spareFonts;
+	}
+
+	&__panel {
+		@include boxSize(100%, 50px);
+		display: flex;
+
+		&__search {
+			@include boxSize(50%, 100%);
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+
+			input {
+				@include defaultInputStyle();
+			}
+		}
+		&__create {
+			@include boxSize(50%, 100%);
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+		}
+	}
+
+	&__table {
+		@include boxSize(100%, auto);
+		min-height: 200px;
+		position: relative;
+		.ant-table-content {
+			.ant-table-tbody {
+				font-family: $mainFontRegular, $spareFonts;
+			}
+		}
+		thead {
+			tr {
+				.ant-table-cell {
+					font-family: $mainFontMedium, $spareFonts;
+					font-size: 14px;
+				}
+			}
+		}
+
+		&__actions {
+			@include boxSize(100%, 22px);
+			display: flex;
+		}
+
+		&__action-btn {
+			@include defaultActionButtonInTable();
+		}
+
+		&__actions-separator {
+			@include boxSize(1px, 100%);
+			background-color: $separator;
+			margin: 0 10px;
+			opacity: 0.5;
+		}
+	}
+}

@@ -1,0 +1,110 @@
+@import "../../../assets/styles/const.scss";
+@import "../../../assets/styles/mixin.scss";
+
+.canvas {
+  @include boxSize(100%, auto);
+  min-height: 600px;
+  position: relative;
+  padding: 0 7% 0 7%;
+  margin: 0 0 50px 0;
+
+  &__component-loading {
+    @include boxSize(100%, 100%);
+    min-height: 600px;
+    position: relative;
+  }
+
+  &__header {
+    @include boxSize(100%, 100px);
+    &__up {
+      @include boxSize(100%, 50px);
+      margin: 20px 0 0 0;
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      .back-arrow {
+        display: block;
+        @include boxSize(50px, 100%);
+        @include flexCenter();
+        font-size: 26px;
+        border-radius: 50%;
+        cursor: pointer;
+        margin: 0 10px 0 0;
+      }
+      .back-arrow:hover {
+        background-color: $arrowBackBackgroundColorHover;
+      }
+      .title {
+        font-family: $mainFontBold, $spareFonts;
+        font-size: 32px;
+      }
+      .type {
+        font-size: 20px;
+        font-family: $mainFontRegular, $spareFonts;
+        color: $canvasTypeTextColor;
+        margin: 0 0 0 10px;
+        padding: 6px 0 0 0;
+      }
+      button:not(.back-arrow) {
+        position: absolute;
+        right: 0;
+      }
+    }
+
+    &__low {
+      margin: 10px 0 0 0;
+      position: relative;
+
+      input {
+        @include defaultInputStyle();
+      }
+      &__buttons {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        button {
+          @include defaultActionButtonInTable();
+        }
+      }
+    }
+  }
+
+  &__body {
+    @include boxSize(100%, auto);
+    min-height: 800px;
+    display: grid;
+    margin: 30px 0 0 0;
+    padding: 1px;
+    grid-gap: 1.2px;
+    position: relative;
+
+    &__background {
+      @include boxSize(100%, 100%);
+      position: absolute;
+      background-color: $canvasBorderColor;
+      z-index: 0;
+    }
+    div:not(.canvas__body__background) {
+      padding: 20px 10px 20px 10px;
+      background-color: #fff;
+      z-index: 2;
+      
+      .canvas__body__title {
+        @include boxSize(100%, auto);
+        font-size: 22px;
+        font-family: $mainFontBold, $spareFonts;
+        text-align: center;
+        line-height: 24px;
+      }
+
+      .canvas__body__content {
+        @include boxSize(100%, 60%);
+        font-size: 15px;
+        font-family: $mainFontRegular, $spareFonts;
+        resize: none;
+      }
+    }
+  }
+}

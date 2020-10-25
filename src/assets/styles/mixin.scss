@@ -1,0 +1,33 @@
+@mixin boxSize($width, $height) {
+	width: $width;
+	height: $height;
+}
+
+@mixin flexCenter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin defaultInputStyle() {
+	@include boxSize(250px, 40px);
+	border: 1px solid $borderColor;
+	border-radius: 4px;
+	padding: 0 10px;
+	font-family: $mainFontMedium, $spareFonts;
+}
+
+@mixin defaultButtonStyle() {
+	background-color: $createButtonBackgroundColor;
+	border-radius: 4px;
+	font-size: 14px;
+	color: $createButtonTextColor;
+	font-family: $mainFontRegular, $spareFonts;
+	cursor: pointer;
+}
+
+@mixin defaultActionButtonInTable {
+	background-color: transparent;
+	color: $buttonBackgroundColor;
+	cursor: pointer;
+}

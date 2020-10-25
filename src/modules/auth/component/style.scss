@@ -1,0 +1,50 @@
+@import "../../../assets/styles/const.scss";
+@import "../../../assets/styles/mixin.scss";
+
+.auth {
+	@include boxSize(100%, 100vh);
+	@include flexCenter();
+
+	* {
+		display: block;
+	}
+
+	&__form {
+		@include boxSize(368px, 400px);
+	}
+
+	&__filed {
+		@include boxSize(100%, 40px);
+		display: flex;
+		background: $inputBackgroundColor;
+		border: 1px solid $inputBorderColor;
+		box-sizing: border-box;
+		border-radius: 4px;
+		margin: 24px 0;
+		.auth__icon {
+			@include boxSize(40px, 40px);
+			@include flexCenter();
+			.anticon {
+				color: $inputTextPlaceholderColor;
+			}
+		}
+		input {
+			@include boxSize(328px, 100%);
+			background-color: transparent;
+			font-size: 16px;
+			color: $inputTextPlaceholderColor;
+		}
+	}
+	&__btn {
+		@include boxSize(368px, 40px);
+		background: $buttonBackgroundColor;
+		border-radius: 4px;
+		color: $buttonTextColor;
+		font-size: 16px;
+		margin: 48px 0 0 0;
+		cursor: pointer;
+	}
+	&__btn:hover {
+		background-color: $buttonBackgroundColorHover;
+	}
+}

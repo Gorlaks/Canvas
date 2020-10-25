@@ -1,0 +1,7 @@
+{
+  "inputFiles": ["./src"],
+  "mode": "file",
+  "out": "doc",
+  "Exclude": ["./**/*.test.ts", "./**/*.test.tsx", "./**/*.stories.tsx"],
+  "theme": "default"
+}

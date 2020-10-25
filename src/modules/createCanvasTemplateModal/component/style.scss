@@ -1,0 +1,134 @@
+@import "../../../assets/styles/const.scss";
+@import "../../../assets/styles/mixin.scss";
+
+.create-canvas-template-modal {
+  &__title {
+    font-family: $mainFontMedium, $spareFonts;
+    font-size: 20px;
+  }
+
+  &__up {
+    @include boxSize(100%, 200px);
+    @include flexCenter();
+    margin: 0 0 10px 0;
+
+    .left-in-up-column {
+      @include boxSize(275px, 100%);
+      display: flex;
+      flex-wrap: wrap;
+      align-content: space-between;
+
+      &__fields {
+        div {
+          display: flex;
+          align-items: center;
+          margin: 2px 0;
+
+          * {
+            margin: 0 10px 0 0;
+          }
+          p {
+            @include boxSize(120px, auto);
+            font-family: $mainFontMedium, $spareFonts;
+            font-size: 15px;
+          }
+          input {
+            @include defaultInputStyle();
+            @include boxSize(40px, 30px);
+            border: 2px solid $mainColor;
+          }
+        }
+      }
+
+      &__description {
+        span, p {
+          font-family: $mainFontRegular, $spareFonts;
+          font-size: 14px;
+          line-height: 20px;
+          margin: 0;
+        }
+      }
+    }
+
+    .empty-preview {
+      @include boxSize(250px, 100%);
+      @include flexCenter();
+      position: relative;
+      border: 2px solid $mainColor;
+      
+      p {
+        color: $mainColorDarker;
+        font-family: $mainFontMedium, $spareFonts;
+        font-size: 20px;
+        margin: 0;
+      }
+    }
+
+    .right-in-up-column {
+      @include boxSize(275px, 100%);
+      position: relative;
+
+      input {
+        @include defaultInputStyle();
+        @include boxSize(200px, 30px);
+        position: absolute;
+        right: 0;
+        border: 2px solid $mainColor;
+      }
+    }
+  }
+
+  &__low {
+    @include boxSize(100%, auto);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    div:not(.add-btn) {
+      @include boxSize(250px, auto);
+      @include flexCenter();
+      background-color: $mainColor;
+      margin: 10px 10px 10px 10px;
+      padding: 5px 10px;
+      flex-wrap: wrap;
+
+      input, textarea {
+        @include defaultInputStyle();
+        margin: 3px 0;
+        resize: none;
+      }
+      input {
+        @include boxSize(100%, 35px);
+      }
+      textarea {
+        @include boxSize(100%, 100px);
+      }
+    }
+    .add-btn {
+      @include boxSize(250px, auto);
+      @include flexCenter();
+      margin: 10px 10px 10px 10px;
+
+      button {
+        @include boxSize(100%, 198px);
+        background-color: $mainColor;
+        border-radius: 4px;
+        font-family: $mainFontMedium, $spareFonts;
+        font-size: 40px;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.preview {
+  @include boxSize(200px, 100%);
+  margin: 0;
+  position: relative;
+  .canvas-template-review__cover {
+    @include boxSize(100%, 100%);
+    position: absolute;
+    background-color: transparent;
+  }
+}

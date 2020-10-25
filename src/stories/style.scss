@@ -1,0 +1,7 @@
+@import "../assets/styles/mixin.scss";
+
+.plus-button_stories {
+  @include boxSize(100%, 100vh);
+  @include flexCenter();
+  background-color: rgba(0, 0, 0, 0.8);
+}

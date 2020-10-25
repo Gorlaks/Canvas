@@ -1,0 +1,35 @@
+// common styles
+$mainFontThin											: "Roboto-Thin";
+$mainFontLight										: "Roboto-Light";
+$mainFontRegular									: "Roboto-Regular";
+$mainFontMedium										: "Roboto-Medium";
+$mainFontBold											: "Roboto-Bold";
+$mainFontBlack										: "Roboto-Black";
+$spareFonts												: "Times New Roman", Times, serif;
+$borderColor											:#c4c4c4;
+$mainColor                        :#1890ff;
+$separator												:#000000;
+
+// auth page styles
+$inputBackgroundColor							:#ffffff;
+$inputBorderColor 								:#D9D9D9;
+$inputTextPlaceholderColor  			:rgba(0, 0, 0, 0.25);
+
+$buttonBackgroundColor 						:#1890FF;
+$buttonBackgroundColorHover 			:rgba(0, 132, 255, 1);
+$buttonTextColor 									:#ffffff;
+
+//user page styles
+$createButtonBackgroundColor  		:#1890FF;
+$createButtonBackgroundColorHover :rgba(0, 132, 255, 1);
+$createButtonTextColor  					:#ffffff;
+
+// canvas page styles
+$canvasTypeTextColor							:#979797;
+$canvasBorderColor								:#000000;
+$arrowBackBackgroundColorHover    :rgba(175, 175, 175, .4);
+
+// canvas template creater modal styles
+$mainColor                        :rgb(161, 161, 161);
+$secondMainColor									:rgba(0, 132, 255, 1);
+$mainColorDarker                  :rgb(126, 126, 126);
