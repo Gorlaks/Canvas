@@ -25,7 +25,7 @@ const CanvasTemplatesBoard = (props: {
               <CanvasTemplateReview templateData={item} />
             </div>
             <div className="canvas-templates-board__actions">
-              <button onClick={() => handleDeleteTemplate(canvasId, userAuthData.id, data, setCanvasTemplateList)}>{LS("Delete")}</button>
+              <button onClick={() => handleDeleteTemplate(canvasId, userAuthData.access_token, data, setCanvasTemplateList)}>{LS("Delete")}</button>
             </div>
           </div>
         )

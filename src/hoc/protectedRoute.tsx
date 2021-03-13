@@ -16,7 +16,7 @@ const ProtectedRoute = (props: {
 }) => {
   const { Component, exact, path } = props;
   const userAuthData = localStorageApi.getLocalData("userAuthData", {});
-  const isAuthorized = Boolean(userAuthData.id);
+  const isAuthorized = Boolean(userAuthData.access_token);
 
   return isAuthorized ?
     <Route

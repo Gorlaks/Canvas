@@ -14,7 +14,5 @@ export interface IRegistrationData {
 }
 
 export interface IUserAuthData {
-	id: string;
-	login: string;
-	email: string;
+    access_token: string;
 }

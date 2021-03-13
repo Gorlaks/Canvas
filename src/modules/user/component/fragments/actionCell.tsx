@@ -57,7 +57,7 @@ const handleDelete = (props: {
   const { canvasService, userAuthData, record } = props;
 
   const loading = message.loading(LS("Loading"));
-  canvasService.deleteCanvas(userAuthData.id, record.id)
+  canvasService.deleteCanvas(userAuthData.access_token, record.id)
     .then((item: Record<string, string>) => {
       if (!item.error) canvasService.setCanvasListAfterRemoving(item.id);
       else message.error(LS(item.error));

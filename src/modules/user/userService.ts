@@ -9,12 +9,16 @@ class UserService implements IUserService {
 	}
 
 	/** @description Write received canvas list to redux store. */
-	async setCanvasList(ownerId: string) {
-		const canvasList: any = await this.userRepository.getCanvasList(ownerId);
-		const filteredCanvasList = await canvasList.map((item: ICanvasList, index: number) => {
+	async setCanvasList(access_token: string) {
+		const answer: any = await this.userRepository.getCanvasList(access_token);
+        const { canvases } = answer.message;
+
+        if (!canvases.length) return;
+
+		const filteredCanvasList = await canvases.map((item: ICanvasList, index: number) => {
 			return {
 				key: index++,
-				id: item.id,
+				id: item["_id"],
 				title: item.title,
 				lastUpdate: item.date,
 				templateType: item.type,

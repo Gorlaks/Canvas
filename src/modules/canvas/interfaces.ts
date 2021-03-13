@@ -2,12 +2,12 @@ import { ICanvasTemplate } from "../admin/interfaces";
 
 export interface ICanvasRepository {
 	getCanvasById(ownerId: string, id: string): Promise<ICanvasData>;
-	getCanvasTypes(id: string): Promise<Array<ICanvasTemplate> | Record<string, string>>;
+	getCanvasTypes(access_token: string): Promise<Array<ICanvasTemplate> | Record<string, string>>;
 }
 
 export interface ICanvasService {
-		deleteCanvas(ownerId: string, canvasId: string): Promise<any>;
-		createCanvas(ownerId: string, title: string, type: string): Promise<any>;
+		deleteCanvas(access_token: string, canvasId: string): Promise<any>;
+		createCanvas(access_token: string, title: string, type: string): Promise<any>;
 		setCanvasListAfterRemoving(canvasId: string): void;
 		updateCanvas(canvasData: Record<string, any>): Promise<any>;
 		downloadPdf(canvasData: Record<string, any>): Promise<any>;

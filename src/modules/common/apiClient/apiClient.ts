@@ -19,6 +19,20 @@ class ApiClient implements IApiClient {
 		
 		return answer.json();
 	}
+
+    async sendGetRequest(path: string) {
+        const answer = await fetch(`${this.url}${path}`);
+
+        return answer.json();
+    }
+
+    async sendDeleteRequest(path: string) {
+        const answer = await fetch(`${this.url}${path}`, {
+            method: "DELETE"
+        });
+
+        return answer.json();
+    }
 }
 
 export default ApiClient;

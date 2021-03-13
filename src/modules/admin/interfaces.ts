@@ -16,7 +16,7 @@ export interface IUsers {
 }
 
 export interface ICanvasTemplate {
-  id: string;
+  _id: string;
   type: string;
   rows: number;
   columns: number;

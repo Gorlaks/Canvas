@@ -19,7 +19,7 @@ export const WithCreateCanvasModal = () => {
   });
   return (
     <Router>
-      <CreateCanvasModal
+      {/* <CreateCanvasModal
         isOpened={true}
         setModalState={() => { }}
         userAuthData={{
@@ -27,7 +27,7 @@ export const WithCreateCanvasModal = () => {
           login: "",
           email: ""
         }}
-      />
+      /> */}
     </Router>
   );
 };

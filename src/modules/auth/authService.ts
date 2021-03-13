@@ -22,7 +22,7 @@ class AuthService implements IAuthService {
 		const result = await this.authRepository.authentication(login, password);
 
 		if (result.error) throw result.error;
-		this.localStorageApi.setLocalData("userAuthData", result);
+		this.localStorageApi.setLocalData("userAuthData", { access_token: result.message.access_token });
 		
 		return result;
 	}

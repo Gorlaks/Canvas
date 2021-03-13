@@ -15,9 +15,9 @@ import { ICanvasTemplate } from "../admin/interfaces";
 const { Option } = Select;
 
 const CreateCanvasModal = (props: {
-  isOpened: boolean,
-  setModalState: Function,
-  userAuthData: IUserAuthData
+  isOpened: boolean;
+  setModalState: Function;
+  userAuthData: IUserAuthData;
 }) => {
   const { isOpened, setModalState, userAuthData } = props;
 
@@ -30,16 +30,21 @@ const CreateCanvasModal = (props: {
   const [canvasTypes, serCanvasTypes] = useState([]);
 
   useEffect(() => {
-    canvasRepository.getCanvasTypes(userAuthData.id)
-    .then((item: any) => {
-      if(item?.error) {
-        message.error(LS(item.error));
-        return;
-      }
-      const filteredCanvasTypes = item.map((item: ICanvasTemplate) => ({ id: item.id, type: item.type }));
-      serCanvasTypes(filteredCanvasTypes);
-      
-    })
+    canvasRepository
+      .getCanvasTypes(userAuthData.access_token)
+      .then((item: any) => {
+        if (item?.code !== 0) {
+          message.error(LS(item.error));
+          return;
+        }
+        const templates = item.message.data;
+        if (!templates.length) return;
+        const filteredCanvasTypes = templates.map((item: ICanvasTemplate) => ({
+          id: item["_id"],
+          type: item["type"],
+        }));
+        serCanvasTypes(filteredCanvasTypes);
+      });
   }, []);
 
   return (
@@ -48,27 +53,29 @@ const CreateCanvasModal = (props: {
         visible={isOpened}
         /** @description Create canvas action. */
         onOk={() => {
-          const ownerId = userAuthData.id;
-          setLoadingState(true);
-          canvasService.createCanvas(ownerId, title, canvasType)
-            .then((item: Record<string, string>) => {
-              if (!item.error) {
-                localStorageApi.setLocalData("canvasId", item.id);
+            const { access_token } = userAuthData;
+            setLoadingState(true);
+            canvasService.createCanvas(access_token, title, canvasType)
+              .then((item: Record<string, string>) => {
+                if (!item.error) {
+                  localStorageApi.setLocalData("canvasId", item.id);
+                  setLoadingState(false);
+                  history.push(RoutePath.CANVAS_PATH);
+                } else message.error(LS(item.error));
+              })
+              .catch((e: ExceptionInformation) => {
+                message.error(LS(e.toString()))
                 setLoadingState(false);
-                history.push(RoutePath.CANVAS_PATH);
-              } else message.error(LS(item.error));
-            })
-            .catch((e: ExceptionInformation) => {
-              message.error(LS(e.toString()))
-              setLoadingState(false);
-            });
+              });
         }}
         confirmLoading={loadingState}
         onCancel={() => setModalState(false)}
         width={431}
       >
         <div className="create-canvas-modal__title">
-          <p>{LS("Create")} {LS("Canvas")}</p>
+          <p>
+            {LS("Create")} {LS("Canvas")}
+          </p>
         </div>
         <div className="create-canvas-modal__name-field">
           <input
@@ -78,16 +85,24 @@ const CreateCanvasModal = (props: {
           />
         </div>
         <div className="create-canvas-modal__type-choice">
-          <Select defaultValue="Lean" style={{ width: 120 }} onChange={useCallback((type: string) => setCanvasType(type), [])}>
-            {canvasTypes.map((item: { id: string, type: string }) => {
-              const { id, type } = item
-              return <Option key={id} value={type}>{type}</Option>
+          <Select
+            defaultValue="Lean"
+            style={{ width: 120 }}
+            onChange={useCallback((type: string) => setCanvasType(type), [])}
+          >
+            {canvasTypes.map((item: { id: string; type: string }) => {
+              const { id, type } = item;
+              return (
+                <Option key={id} value={type}>
+                  {type}
+                </Option>
+              );
             })}
           </Select>
         </div>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
 export default CreateCanvasModal;

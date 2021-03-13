@@ -9,10 +9,10 @@ class UserRepositroy implements IUserRepository {
 		this.apiClient = apiClient;
 	}
  	/** @description Send post request for getting canvas list of current user. */
-	async getCanvasList(ownerId: string) {
+	async getCanvasList(access_token: string) {
 		const answer = await this.apiClient.sendRequest({
-			ownerId
-		}, "/userCanvasList");
+			access_token
+		}, "/get_user_canvases");
 		
 		return answer;
 	}

@@ -1,13 +1,13 @@
 export interface IUserRepository {
-	getCanvasList(ownerId: string): Promise<ICanvasList>;
+	getCanvasList(access_token: string): Promise<ICanvasList>;
 }
 
 export interface IUserService {
-	setCanvasList(ownerId: string): Promise<any>;
+	setCanvasList(access_token: string): Promise<any>;
 }
 
 export interface ICanvasList {
-	id: string;
+	_id: string;
 	ownerId: string;
 	title: string;
 	date: string;

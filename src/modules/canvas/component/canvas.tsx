@@ -29,7 +29,7 @@ const Canvas = () => {
 	useEffect(() => {
 		if (!canvasId) history.push(RoutePath.USER_PATH);
 		else {
-			canvasRepository.getCanvasById(userAuthData.id, canvasId)
+			canvasRepository.getCanvasById(userAuthData.access_token, canvasId)
 				.then((item: any) => {
 					if (!item.error) setCanvasDataState(item);
 					else message.error(LS(item.error))

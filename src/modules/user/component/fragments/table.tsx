@@ -22,8 +22,8 @@ const Table = (props: {
 	 * and put received information to redux store.
 	*/
 	useEffect(() => {
-		const { id } = userAuthData;
-		userService.setCanvasList(id)
+		const { access_token } = userAuthData;
+		userService.setCanvasList(access_token)
 		.then((item: any) => setFilteredCanvasList(item))
 		.finally(() => setTableLoading(false));
 	}, [])
