@@ -8,10 +8,10 @@ import localStorageApi from "../../../initialize/api/localStorageApi";
 import canvasRepository from "../../../initialize/repositories/canvasRepository";
 import { RoutePath } from "../../../utils/constants";
 import { IUserAuthData } from "../../auth/interfaces";
+import { IServerResponse } from "../../common/interfaces/interfaces";
 
 import CanvasContent from "./fragments/canvasContent";
 import ComponentLoading from "../../../assets/ui/componentLoading/componentLoading";
-import { LS } from "../../../utils/helpers";
 
 const Canvas = () => {
 	const history = useHistory();
@@ -30,9 +30,12 @@ const Canvas = () => {
 		if (!canvasId) history.push(RoutePath.USER_PATH);
 		else {
 			canvasRepository.getCanvasById(userAuthData.access_token, canvasId)
-				.then((item: any) => {
-					if (!item.error) setCanvasDataState(item);
-					else message.error(LS(item.error))
+				.then((response: IServerResponse) => {
+                    if (response.code !== 0) {
+                        message.error(`Error code - ${response.code}`);
+                        return;
+                    }
+					setCanvasDataState(response?.message?.data);
 				});
 		}
 	}, [])

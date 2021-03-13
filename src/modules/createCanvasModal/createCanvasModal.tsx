@@ -11,6 +11,7 @@ import { LS } from "../../utils/helpers";
 import { RoutePath } from "../../utils/constants";
 import { IUserAuthData } from "../auth/interfaces";
 import { ICanvasTemplate } from "../admin/interfaces";
+import { IServerResponse } from "../common/interfaces/interfaces";
 
 const { Option } = Select;
 
@@ -26,7 +27,7 @@ const CreateCanvasModal = (props: {
   /** @description Splash icon state in ok button. */
   const [loadingState, setLoadingState] = useState(false);
   const [title, setTitle] = useState("");
-  const [canvasType, setCanvasType] = useState("Lean");
+  const [canvasType, setCanvasType] = useState("lean");
   const [canvasTypes, serCanvasTypes] = useState([]);
 
   useEffect(() => {
@@ -53,20 +54,23 @@ const CreateCanvasModal = (props: {
         visible={isOpened}
         /** @description Create canvas action. */
         onOk={() => {
-            const { access_token } = userAuthData;
-            setLoadingState(true);
-            canvasService.createCanvas(access_token, title, canvasType)
-              .then((item: Record<string, string>) => {
-                if (!item.error) {
-                  localStorageApi.setLocalData("canvasId", item.id);
-                  setLoadingState(false);
-                  history.push(RoutePath.CANVAS_PATH);
-                } else message.error(LS(item.error));
-              })
-              .catch((e: ExceptionInformation) => {
-                message.error(LS(e.toString()))
-                setLoadingState(false);
-              });
+          const { access_token } = userAuthData;
+          setLoadingState(true);
+          canvasService
+            .createCanvas(access_token, title, canvasType)
+            .then((item: IServerResponse) => {
+              if (item.code !== 0) {
+                message.error(`Code error - ${item.code}`);
+                return;
+              }
+              localStorageApi.setLocalData("canvasId", item.created_canvas_id);
+              setLoadingState(false);
+              history.push(RoutePath.CANVAS_PATH);
+            })
+            .catch((e: ExceptionInformation) => {
+              message.error(LS(e.toString()));
+              setLoadingState(false);
+            });
         }}
         confirmLoading={loadingState}
         onCancel={() => setModalState(false)}
@@ -86,7 +90,7 @@ const CreateCanvasModal = (props: {
         </div>
         <div className="create-canvas-modal__type-choice">
           <Select
-            defaultValue="Lean"
+            defaultValue="lean"
             style={{ width: 120 }}
             onChange={useCallback((type: string) => setCanvasType(type), [])}
           >
