@@ -13,6 +13,7 @@ import LeftInUpColumn from "./fragments/leftInUpColumn";
 import EmptyPreview from "./fragments/emptyPreview";
 import RightInUpColumn from "./fragments/rightInUpColumn";
 import CreateCanvasTemplateModalBody from "./fragments/createCanvasTemplateModalBody";
+import localStorageApi from "../../../initialize/api/localStorageApi";
 
 
 const CreateCanvasTemplateModal = (props: {
@@ -20,12 +21,12 @@ const CreateCanvasTemplateModal = (props: {
   setModalState: Function
 }) => {
   const { modalState, setModalState } = props;
+  const access_token: string = localStorageApi.getLocalData("userAuthData", {}).access_token;
 
   const [loadingState, setLoadingState] = useState(false);
   /** @description default canvas template data. */
   const [templateState, setTemplateState] = useState({
-    ownerId: null,
-    title: null,
+    access_token,
     type: null,
     date: null,
     rows: null,

@@ -24,8 +24,7 @@ export interface ICanvasData {
 }
 
 export interface ICreateCanvasTemplate {
-	ownerId: string | null;
-	title: string | null;
+	access_token: string;
 	type: string | null;
 	date: string | null;
 	rows: number | null;

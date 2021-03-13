@@ -11,7 +11,7 @@ class CreateCanvasTemplateModalService implements ICreateCanvasTemplateModalServ
 
   /** @description Send post request for creating canvas template. */
   async createCanvasTemplate(templateData: ICreateCanvasTemplate) {
-    await this.apiClient.sendRequest(templateData, "/admin/createCanvasTemplate")
+    await this.apiClient.sendRequest(templateData, "/create_canvas_template")
   }
 }
 
