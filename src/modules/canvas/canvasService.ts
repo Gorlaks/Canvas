@@ -2,6 +2,7 @@ import userStatesStorage from "../../initialize/statesStorages/userStatesStorage
 
 import { ICanvasService, ICanvasData } from "./interfaces";
 import { IApiClient } from "../common/apiClient/interfaces";
+import localStorageApi from "../../initialize/api/localStorageApi";
 
 /**
  * The main class to process canvas data.
@@ -37,12 +38,13 @@ class CanvasService implements ICanvasService {
 
     /** @description Send post request for update canvas in database. */
     async updateCanvas(canvasData: Record<string, any>) {
+        const access_token: string = localStorageApi.getLocalData("userAuthData", {}).access_token;
         return await this.apiClient.sendRequest({
-            canvasId: canvasData.id,
-            ownerId: canvasData.ownerId,
+            access_token,
+            canvas_id: canvasData["_id"],
             title: canvasData.title,
             data: canvasData.data
-        }, "/updateCanvas");
+        }, "/update_canvas");
     }
 
     async downloadPdf(canvasData: ICanvasData) {

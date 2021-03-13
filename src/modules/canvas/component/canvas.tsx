@@ -35,11 +35,11 @@ const Canvas = () => {
                         message.error(`Error code - ${response.code}`);
                         return;
                     }
-					setCanvasDataState(response?.message?.data);
+                    
+					setCanvasDataState(response.message.data);
 				});
 		}
 	}, [])
-
 	return (
 		<div className="canvas">
 			{canvasDataState.data ? <CanvasContent canvasData={canvasDataState} />
