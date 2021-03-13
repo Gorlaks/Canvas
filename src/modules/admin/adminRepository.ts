@@ -9,7 +9,7 @@ class AdminRepository implements IAdminRepository{
   }
 
   async getUsersList(access_token: string) {
-    return await this.apiClient.sendRequest({ access_token }, "/admin/getUsers")
+    return await this.apiClient.sendGetRequest(`/admin/get_users?access_token=${access_token}`);
   }
 
   async getCanvasTemplateList(access_token: string) {

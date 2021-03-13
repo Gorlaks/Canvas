@@ -6,6 +6,7 @@ import adminService from "../../../../initialize/services/adminService";
 import CanvasTemplateReview from "../../../../assets/ui/canvasTemplateReview/canvasTemplateReview";
 import { LS } from "../../../../utils/helpers";
 import { message } from "antd";
+import { IServerResponse } from "../../../common/interfaces/interfaces";
 
 const CanvasTemplatesBoard = (props: {
   data: Array<any>,
@@ -44,9 +45,9 @@ const handleDeleteTemplate = (
   adminService.deleteCanvasTemplate({
     ownerId,
     canvasId
-  }).then(item => {
-    if(item?.error) {
-      message.error(LS(item?.error));
+  }).then((response: IServerResponse) => {
+    if(response.code !== 0) {
+      message.error(`Error code - ${response.code}`);
       return;
     }
     message.success(LS("Success"));

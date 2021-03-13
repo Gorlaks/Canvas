@@ -30,7 +30,7 @@ class AuthService implements IAuthService {
 	/** @description User registration and write user data to redux store */
 	async registration(data: IRegistrationData) {
 		const result = await this.apiClient.sendRequest(data, "/registration");
-		if (result.error) throw result.error;
+		if (result.code !== 0) throw result.code;
 
 		this.localStorageApi.setLocalData("userAuthData", result);
 		return result;

@@ -1,12 +1,13 @@
 import { ICanvasBlocksData } from "../canvas/interfaces";
+import { IServerResponse } from "../common/interfaces/interfaces";
 
 export interface IAdminService {
-  deleteCanvasTemplate(templateData: IDeleteCanvasTemplate): Promise<Record<string, string>>;
+  deleteCanvasTemplate(templateData: IDeleteCanvasTemplate): Promise<IServerResponse>;
 }
 
 export interface IAdminRepository {
-  getUsersList(id: string): Promise<Array<IUsers>>;
-  getCanvasTemplateList(id: string): Promise<any>;
+  getUsersList(access_token: string): Promise<IServerResponse>;
+  getCanvasTemplateList(access_token: string): Promise<IServerResponse>;
 }
 
 export interface IUsers {

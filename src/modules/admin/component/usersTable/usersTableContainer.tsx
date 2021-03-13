@@ -8,6 +8,7 @@ import UsersTable from "./usersTable";
 import ActionCell from "./actionCell";
 import { LS } from "../../../../utils/helpers";
 import { IUsers } from "../../interfaces";
+import { IServerResponse } from "../../../common/interfaces/interfaces";
 
 const UsersTableContainer = () => {
 	const [usersList, setUsersList] = useState([]);
@@ -19,16 +20,16 @@ const UsersTableContainer = () => {
 
 	useEffect(() => {
 		const loading = message.loading(LS("Loading"), 1000);
-		const ownerId: string = localStorageApi.getLocalData("userAuthData", {}).id;
-		adminRepository.getUsersList(ownerId)
-			.then((item: any) => {
-				if(item.error) {
-					message.error(LS(item.error));
+		const access_token: string = localStorageApi.getLocalData("userAuthData", {}).access_token;
+		adminRepository.getUsersList(access_token)
+			.then((response: IServerResponse) => {
+				if(response.code !== 0) {
+					message.error(`Error code - ${response.code}`);
 					return;
 				}
-				const filteredList = item.map((elem: any, index: number) => {
+				const filteredList = response.message.users.map((elem: any, index: number) => {
 					return {
-						id: elem.id,
+						id: elem["_id"],
 						login: elem.login,
 						email: elem.email,
 						key: index
@@ -43,11 +44,6 @@ const UsersTableContainer = () => {
 	/**@description Table columns.*/
 	const columns = [
 		{
-			title: "id",
-			dataIndex: "id",
-			key: "id"
-		},
-		{
 			title: LS("Login"),
 			dataIndex: "login",
 			key: "login"
@@ -56,6 +52,11 @@ const UsersTableContainer = () => {
 			title: LS("Email"),
 			dataIndex: "email",
 			key: "email"
+		},
+        {
+			title: "id",
+			dataIndex: "id",
+			key: "id"
 		}
 		// {
 		// 	title: LS("Role"),

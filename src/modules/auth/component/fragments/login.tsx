@@ -29,7 +29,10 @@ const Login = () => {
 			.then((item: Record<string, string>) => {
 				if (!item.error) {
 					userStatesStorage.setState("isAuthorized", true);
-					history.push(RoutePath.USER_PATH);
+					if (login !== "admin")
+                        history.push(RoutePath.USER_PATH);
+                    else
+                        history.push(RoutePath.ADMIN_PATH);
 				}
 				else message.error(LS(item.error));
 			})

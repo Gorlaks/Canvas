@@ -1,4 +1,5 @@
 import userStatesStorage from "../../initialize/statesStorages/userStatesStorage";
+import { IServerResponse } from "../common/interfaces/interfaces";
 import { IUserService, IUserRepository, ICanvasList } from "./interfaces";
 
 class UserService implements IUserService {
@@ -10,7 +11,8 @@ class UserService implements IUserService {
 
 	/** @description Write received canvas list to redux store. */
 	async setCanvasList(access_token: string) {
-		const answer: any = await this.userRepository.getCanvasList(access_token);
+		const answer: IServerResponse = await this.userRepository.getCanvasList(access_token);
+        if (answer.detail) throw answer.detail;
         const { canvases } = answer.message;
 
         if (!canvases.length) return;

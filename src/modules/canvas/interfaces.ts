@@ -3,7 +3,7 @@ import { IServerResponse } from "../common/interfaces/interfaces";
 
 export interface ICanvasRepository {
 	getCanvasById(access_token: string, id: string): Promise<IServerResponse>;
-	getCanvasTypes(access_token: string): Promise<Array<ICanvasTemplate> | Record<string, string>>;
+	getCanvasTypes(access_token: string): Promise<IServerResponse>;
 }
 
 export interface ICanvasService {

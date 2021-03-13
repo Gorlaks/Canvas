@@ -1,3 +1,5 @@
+import { IServerResponse } from "../interfaces/interfaces";
+
 export interface IBody {
 	access_token?: string;
 	id?: string | null;
@@ -11,7 +13,7 @@ export interface IBody {
 }
 
 export interface IApiClient {
-	sendRequest(params: IBody, path: string): Promise<any>;
-	sendGetRequest(path: string): Promise<any>;
-	sendDeleteRequest(path: string): Promise<any>;
+	sendRequest(params: IBody, path: string): Promise<IServerResponse>;
+	sendGetRequest(path: string): Promise<IServerResponse>;
+	sendDeleteRequest(path: string): Promise<IServerResponse>;
 }

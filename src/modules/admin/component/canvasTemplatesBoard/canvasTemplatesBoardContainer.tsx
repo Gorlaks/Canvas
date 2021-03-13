@@ -7,6 +7,7 @@ import localStorageApi from "../../../../initialize/api/localStorageApi";
 import adminStatesStorage from "../../../../initialize/statesStorages/adminStatesStorage";
 import { ICanvasTemplate } from "../../interfaces";
 import { LS } from "../../../../utils/helpers";
+import { IServerResponse } from "../../../common/interfaces/interfaces";
 
 const CanvasTemplatesBoardContainer = () => {
   const [canvasTemplateList, setCanvasTemplateList] = useState([]);
@@ -20,13 +21,13 @@ const CanvasTemplatesBoardContainer = () => {
     const loading = message.loading(LS("Loading"), 1000);
     const ownerId: string = localStorageApi.getLocalData("userAuthData", {}).id;
     adminRepository.getCanvasTemplateList(ownerId)
-      .then((item) => {
-        if (item.error) {
-          message.error(LS(item.error));
+      .then((response: IServerResponse) => {
+        if (response.code !== 0) {
+          message.error(`Error code - ${response.code}`);
           return;
         };
 
-        adminStatesStorage.setState("canvasTemplateList", item);
+        adminStatesStorage.setState("canvasTemplateList", response.message.templates);
       })
       .catch((e: string) => message.error(LS(e.toString())))
       .finally(() => loading());
