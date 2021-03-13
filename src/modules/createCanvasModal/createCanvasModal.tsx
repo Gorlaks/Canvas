@@ -58,12 +58,12 @@ const CreateCanvasModal = (props: {
           setLoadingState(true);
           canvasService
             .createCanvas(access_token, title, canvasType)
-            .then((item: IServerResponse) => {
-              if (item.code !== 0) {
-                message.error(`Code error - ${item.code}`);
+            .then((response: IServerResponse) => {
+              if (response.code !== 0) {
+                message.error(`Code error - ${response.code}`);
                 return;
               }
-              localStorageApi.setLocalData("canvasId", item.created_canvas_id);
+              localStorageApi.setLocalData("canvasId", response.message.created_canvas_id);
               setLoadingState(false);
               history.push(RoutePath.CANVAS_PATH);
             })
