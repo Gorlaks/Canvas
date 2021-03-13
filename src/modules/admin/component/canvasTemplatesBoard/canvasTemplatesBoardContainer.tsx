@@ -19,15 +19,15 @@ const CanvasTemplatesBoardContainer = () => {
 
   useEffect(() => {
     const loading = message.loading(LS("Loading"), 1000);
-    const ownerId: string = localStorageApi.getLocalData("userAuthData", {}).id;
-    adminRepository.getCanvasTemplateList(ownerId)
+    const access_token: string = localStorageApi.getLocalData("userAuthData", {}).access_token;
+    adminRepository.getCanvasTemplateList(access_token)
       .then((response: IServerResponse) => {
         if (response.code !== 0) {
           message.error(`Error code - ${response.code}`);
           return;
         };
 
-        adminStatesStorage.setState("canvasTemplateList", response.message.templates);
+        adminStatesStorage.setState("canvasTemplateList", response.message.data);
       })
       .catch((e: string) => message.error(LS(e.toString())))
       .finally(() => loading());

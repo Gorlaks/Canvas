@@ -2,7 +2,7 @@ import { ICanvasBlocksData } from "../canvas/interfaces";
 import { IServerResponse } from "../common/interfaces/interfaces";
 
 export interface IAdminService {
-  deleteCanvasTemplate(templateData: IDeleteCanvasTemplate): Promise<IServerResponse>;
+  deleteCanvasTemplate(access_token: string, type: string): Promise<IServerResponse>;
 }
 
 export interface IAdminRepository {

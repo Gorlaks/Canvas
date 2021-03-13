@@ -14,10 +14,12 @@ const CanvasTemplateReview = (props: {
     gridTemplateRows: `repeat(${rows}, 1fr)`,
     gridTemplateColumns: `repeat(${columns}, 1fr)`
   }
-
   return (
     <div className="canvas-template-review" style={canvasContentStyles}>
-      {Boolean(data.length && data.map) && data.map((item: ICanvasBlocksData, index: number) => {
+      {data.length && data.map((item: ICanvasBlocksData, index: number) => {
+        if (!item.position)
+            return;
+
         const { position, title } = item;
         const canvasItemStyles = {
           gridArea: `${position[0]}/${position[1]}/${position[2]}/${position[3]}`

@@ -13,7 +13,7 @@ class AdminRepository implements IAdminRepository{
   }
 
   async getCanvasTemplateList(access_token: string) {
-    return await this.apiClient.sendRequest({ access_token }, "/canvas_templates");
+    return await this.apiClient.sendGetRequest(`/canvas_templates?access_token=${access_token}`);
   }
 }
 

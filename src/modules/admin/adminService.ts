@@ -8,8 +8,8 @@ class AdminService implements IAdminService {
     this.apiClient = apiClient;
   }
 
-  async deleteCanvasTemplate(templateData: IDeleteCanvasTemplate) {
-    return await this.apiClient.sendRequest(templateData, "/admin/deleteCanvasTemplate");
+  async deleteCanvasTemplate(access_token: string, type: string) {
+    return await this.apiClient.sendDeleteRequest(`/delete_canvas_template?access_token=${access_token}&canvas_type=${type}`);
   }
 }
 
