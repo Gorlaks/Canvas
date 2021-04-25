@@ -51,7 +51,7 @@ class CanvasService implements ICanvasService {
         return await this.apiClient.sendRequest({
             title: canvasData.title,
             data: canvasData.data
-        }, "/createPdf");
+        }, "/create_pdf");
     }
 }
 

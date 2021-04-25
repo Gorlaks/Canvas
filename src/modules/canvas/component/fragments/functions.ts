@@ -1,4 +1,5 @@
 import { message } from "antd";
+import { jsPDF } from "jspdf";
 
 import { LS } from "../../../../utils/helpers";
 import { ICanvasService, ICanvasBlocksData } from "../../interfaces";
@@ -7,47 +8,56 @@ import { ICanvasService, ICanvasBlocksData } from "../../interfaces";
  * @description Write user's content of canvas to canvasData.data for sending to the server.
 */
 export const writeContentToCanvasDataBlocks = (e: any, canvasData: Record<string, any>) => {
-	canvasData.data = canvasData.data.map((item: ICanvasBlocksData) => {
-		if (item.title === e.target.dataset.title) {
-			item.content = e.target.value;
-			return item
-		}
-		return item
-	})
+    canvasData.data = canvasData.data.map((item: ICanvasBlocksData) => {
+        if (item.title === e.target.dataset.title) {
+            item.content = e.target.value;
+            return item
+        }
+        return item
+    })
 };
 
 /**
  * @description Update canvas function.
 */
 export const handleUpdate = (props: {
-	canvasData: Record<string, any>,
-	canvasService: ICanvasService
+    canvasData: Record<string, any>,
+    canvasService: ICanvasService
 }) => {
-	const { canvasData, canvasService } = props;
-	const loading = message.loading(LS("Loading"));
-	canvasService.updateCanvas(canvasData)
-		.then((item: Record<string, string>) => {
-			if (!item.error) message.success(LS("Canvas_success_update"));
-			else message.error(LS(item.error));
-		})
-		.catch((e: ExceptionInformation) => message.error(LS(e.toString())))
-		.finally(() => loading());
+    const { canvasData, canvasService } = props;
+    const loading = message.loading(LS("Loading"));
+    canvasService.updateCanvas(canvasData)
+        .then((item: Record<string, string>) => {
+            if (!item.error) message.success(LS("Canvas_success_update"));
+            else message.error(LS(item.error));
+        })
+        .catch((e: ExceptionInformation) => message.error(LS(e.toString())))
+        .finally(() => loading());
 };
 
 /**
  * @description The method for download canvas in pdf format.
 */
 export const handleDownloadPdf = (props: {
-	canvasData: Record<string, any>,
-	canvasService: ICanvasService
+    canvasData: Record<string, any>,
+    canvasService: ICanvasService
 }) => {
-	const { canvasData, canvasService } = props;
-	const loading = message.loading(LS("Loading"), 100);
-	canvasService.downloadPdf(canvasData)
-		.then((item: Record<string, string>) => {
-			if (!item.error) window.open(item.pathToDocument);
-			else message.error(LS(item.error));
-		})
-		.catch((e: ExceptionInformation) => message.error(LS(e.toString())))
-		.finally(() => loading());
+    const { canvasData } = props;
+    const doc = new jsPDF();
+
+    const mainTitle = "";
+    // Block with content.
+    let content = "";
+
+    canvasData.data.forEach((item: any) => 
+    {
+        content += `${item.title}: ${item.content}\n`;
+    });
+
+    content += "";
+
+    const htmlString = mainTitle + content;
+
+    doc.text(htmlString, 10, 10);
+    doc.save("canvas.pdf");
 };
