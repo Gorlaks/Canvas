@@ -27,9 +27,27 @@ export const handleUpdate = (props: {
     const { canvasData, canvasService } = props;
     const loading = message.loading(LS("Loading"));
     canvasService.updateCanvas(canvasData)
-        .then((item: Record<string, string>) => {
-            if (!item.error) message.success(LS("Canvas_success_update"));
-            else message.error(LS(item.error));
+        .then((item: Record<string, any>) => {
+            if (item.code === 0) message.success(LS("Canvas_success_update"));
+            else message.error(LS(item.message));
+        })
+        .catch((e: ExceptionInformation) => message.error(LS(e.toString())))
+        .finally(() => loading());
+};
+
+/**
+ * @description Send canvas to mail.
+*/
+export const handleSend = (props: {
+    canvasData: Record<string, any>,
+    canvasService: ICanvasService
+}) => {
+    const { canvasData, canvasService } = props;
+    const loading = message.loading(LS("Loading"));
+    canvasService.sendCanvas(canvasData)
+        .then((item: Record<string, any>) => {
+            if (item === null) message.success(LS("Canvas sent successfully"));
+            else message.error(LS(item.message));
         })
         .catch((e: ExceptionInformation) => message.error(LS(e.toString())))
         .finally(() => loading());
@@ -46,7 +64,6 @@ export const handleDownloadPdf = (props: {
     const doc = new jsPDF();
 
     const mainTitle = "";
-    // Block with content.
     let content = "";
 
     canvasData.data.forEach((item: any) => 

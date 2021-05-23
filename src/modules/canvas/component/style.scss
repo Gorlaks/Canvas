@@ -46,9 +46,14 @@
         margin: 0 0 0 10px;
         padding: 6px 0 0 0;
       }
-      button:not(.back-arrow) {
+      &__actions {
+        display: flex;
         position: absolute;
         right: 0;
+
+        button {
+            margin: 0 0 0 20px;
+        }
       }
     }
 

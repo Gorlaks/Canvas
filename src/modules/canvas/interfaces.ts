@@ -11,6 +11,7 @@ export interface ICanvasService {
 		createCanvas(access_token: string, title: string, type: string): Promise<any>;
 		setCanvasListAfterRemoving(canvasId: string): void;
 		updateCanvas(canvasData: Record<string, any>): Promise<any>;
+		sendCanvas(canvasData: Record<string, any>): Promise<any>;
 		downloadPdf(canvasData: Record<string, any>): Promise<any>;
 }
 

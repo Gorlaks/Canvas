@@ -47,6 +47,14 @@ class CanvasService implements ICanvasService {
         }, "/update_canvas");
     }
 
+    /** @description Send post request for sending canvas to mail. */
+    async sendCanvas(canvasData: Record<string, any>) {
+        return await this.apiClient.sendRequest({
+            title: canvasData.title,
+            data: canvasData.data
+        }, "/send_canvas_to_mail");
+    }
+
     async downloadPdf(canvasData: ICanvasData) {
         return await this.apiClient.sendRequest({
             title: canvasData.title,

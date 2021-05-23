@@ -6,7 +6,7 @@ import canvasService from "../../../../initialize/services/canvasService";
 import PlusButton from "../../../../assets/ui/plusButton/plusButton";
 import { newStrokeInTextArea, resizeContainer, LS } from "../../../../utils/helpers";
 import { RoutePath } from "../../../../utils/constants";
-import { handleUpdate, writeContentToCanvasDataBlocks, handleDownloadPdf } from "./functions";
+import { handleUpdate, handleSend, writeContentToCanvasDataBlocks, handleDownloadPdf } from "./functions";
 
 const CanvasContent = (props: {
 	canvasData: Record<string, any>
@@ -29,7 +29,10 @@ const CanvasContent = (props: {
 					<button className="back-arrow" onClick={() => history.push(RoutePath.USER_PATH)}><LeftOutlined /></button>
 					<span className="title">{LS("Editing")} {LS("Canvas")}</span>
 					<span className="type">{type}</span>
-					<PlusButton text={LS("Save")} handleClick={() => handleUpdate({canvasData, canvasService})} />
+					<div className="canvas__header__up__actions">
+                        <PlusButton text={LS("Save")} handleClick={() => handleUpdate({canvasData, canvasService})} />
+                        <PlusButton text={LS("Send")} handleClick={() => handleSend({canvasData, canvasService})} />
+                    </div>
 				</div>
 				<div className="canvas__header__low">
 					<input type="text" placeholder={LS("Enter_canvas_name")} defaultValue={title} onChange={(e: any) => canvasData.title = e.target.value} />
