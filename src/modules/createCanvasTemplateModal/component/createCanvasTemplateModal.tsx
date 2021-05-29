@@ -98,9 +98,9 @@ const handleCreateCanvasTemplate = (props: {
 
   setLoadingState(true);
   createCanvasTemplateModalService.createCanvasTemplate(templateState)
-    .then((item: Record<string, string>) => {
-      if (item?.error) {
-        message.error(LS(item?.error));
+    .then((item: Record<string, any>) => {
+      if (item?.code === 1) {
+        message.error(LS(item.message));
         return;
       };
       setModalState(false);

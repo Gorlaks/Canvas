@@ -12,7 +12,7 @@ class UserService implements IUserService {
 	/** @description Write received canvas list to redux store. */
 	async setCanvasList(access_token: string) {
 		const answer: IServerResponse = await this.userRepository.getCanvasList(access_token);
-        if (answer.detail) throw answer.detail;
+        if (answer?.code === 1) throw answer.message;
         const { canvases } = answer.message;
 
         if (!canvases.length) return;

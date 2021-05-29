@@ -22,8 +22,8 @@ const CanvasTemplatesBoardContainer = () => {
     const access_token: string = localStorageApi.getLocalData("userAuthData", {}).access_token;
     adminRepository.getCanvasTemplateList(access_token)
       .then((response: IServerResponse) => {
-        if (response.code !== 0) {
-          message.error(`Error code - ${response.code}`);
+        if (response?.code !== 0) {
+          message.error(`Error - ${response.message}`);
           return;
         };
 

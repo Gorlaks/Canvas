@@ -76,8 +76,8 @@ const handleDelete = (props: {
   canvasService
     .deleteCanvas(userAuthData.access_token, record.id)
     .then((response: IServerResponse) => {
-      if (response.code !== 0) {
-        message.error(`Error code - ${response.code}`);
+      if (response?.code !== 0) {
+        message.error(`Error - ${response.message}`);
         return;
       }
       canvasService.setCanvasListAfterRemoving(response.message["deleted_canvas_id"]);

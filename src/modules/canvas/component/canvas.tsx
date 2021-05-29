@@ -31,8 +31,8 @@ const Canvas = () => {
 		else {
 			canvasRepository.getCanvasById(userAuthData.access_token, canvasId)
 				.then((response: IServerResponse) => {
-                    if (response.code !== 0) {
-                        message.error(`Error code - ${response.code}`);
+                    if (response?.code !== 0) {
+                        message.error(`Error - ${response.message}`);
                         return;
                     }
                     

@@ -6,6 +6,7 @@ const en = {
 	"Create": "Create",
 	"Update": "Update",
 	"Save": "Save",
+	"Send": "Send",
 	"Edit": "Edit",
 	"Editing": "Editing",
 	"Something_went_wrong": "Something went wrong",

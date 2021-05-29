@@ -23,8 +23,8 @@ const UsersTableContainer = () => {
 		const access_token: string = localStorageApi.getLocalData("userAuthData", {}).access_token;
 		adminRepository.getUsersList(access_token)
 			.then((response: IServerResponse) => {
-				if(response.code !== 0) {
-					message.error(`Error code - ${response.code}`);
+				if(response?.code !== 0) {
+					message.error(`Error - ${response.message}`);
 					return;
 				}
 				const filteredList = response.message.users.map((elem: any, index: number) => {

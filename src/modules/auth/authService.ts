@@ -21,7 +21,7 @@ class AuthService implements IAuthService {
 	async login(login: string, password: string) {
 		const result = await this.authRepository.authentication(login, password);
 
-		if (result.error) throw result.error;
+		if (result?.code === 1) throw result.message;
 		this.localStorageApi.setLocalData("userAuthData", { access_token: result.message.access_token });
 		
 		return result;
@@ -30,7 +30,7 @@ class AuthService implements IAuthService {
 	/** @description User registration and write user data to redux store */
 	async registration(data: IRegistrationData) {
 		const result = await this.apiClient.sendRequest(data, "/registration");
-		if (result.code !== 0) throw result.code;
+		if (result?.code !== 0) throw result.message;
 
 		this.localStorageApi.setLocalData("userAuthData", result);
 		return result;

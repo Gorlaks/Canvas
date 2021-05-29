@@ -28,7 +28,7 @@ export const handleUpdate = (props: {
     const loading = message.loading(LS("Loading"));
     canvasService.updateCanvas(canvasData)
         .then((item: Record<string, any>) => {
-            if (item.code === 0) message.success(LS("Canvas_success_update"));
+            if (item?.code === 0) message.success(LS("Canvas_success_update"));
             else message.error(LS(item.message));
         })
         .catch((e: ExceptionInformation) => message.error(LS(e.toString())))

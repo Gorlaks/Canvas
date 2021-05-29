@@ -59,8 +59,8 @@ const CreateCanvasModal = (props: {
           canvasService
             .createCanvas(access_token, title, canvasType)
             .then((response: IServerResponse) => {
-              if (response.code !== 0) {
-                message.error(`Code error - ${response.code}`);
+              if (response?.code !== 0) {
+                message.error(`Error - ${response.message}`);
                 return;
               }
               localStorageApi.setLocalData("canvasId", response.message.created_canvas_id);
@@ -90,7 +90,7 @@ const CreateCanvasModal = (props: {
         </div>
         <div className="create-canvas-modal__type-choice">
           <Select
-            defaultValue="lean"
+            defaultValue="Type"
             style={{ width: 120 }}
             onChange={useCallback((type: string) => setCanvasType(type), [])}
           >
